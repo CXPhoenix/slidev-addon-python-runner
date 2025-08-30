@@ -1,5 +1,5 @@
 {
-  "name": "slidev-addon-python-runner",
+  "name": "@cxphoenix/slidev-addon-python-runner",
   "version": "0.2.0",
   "type": "module",
   "scripts": {
@@ -16,7 +16,7 @@
   "description": "A Slidev addon that allows you to run Python code in your slides.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/KermanX/slidev-addon-python-runner.git"
+    "url": "https://github.com/CXPhoenix/slidev-addon-python-runner.git"
   },
   "author": {
     "name": "CXPhoenix",
