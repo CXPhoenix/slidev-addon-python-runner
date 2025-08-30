@@ -1,6 +1,7 @@
 ---
 theme: default
 layout: default
+lineNumbers: on
 python:
   # Install packages from PyPI. Default: []
   installs: ["cowsay"]
@@ -41,4 +42,13 @@ df = pd.DataFrame({
 })
 
 print(df)
+```
+
+---
+
+# Python Input Testing
+
+```py {monaco-run} {autorun: false}
+name = input()
+print(f"hello {name}")
 ```

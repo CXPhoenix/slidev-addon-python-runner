@@ -1,0 +1,41 @@
+name: Release to NPM
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          registry-url: https://registry.npmjs.org
+          scope: "@cxphoenix"
+
+      - name: Install PNPM
+        run: npm install -g pnpm@10.5.2
+
+      - name: Install dependencies 📦️
+        run: pnpm install --frozen-lockfile
+
+      - name: Build 🔨
+        run: pnpm build
+    
+        # 從 GitHub Release 獲取版本號並更新 package.json
+      - name: Update version from GitHub Release
+        run: |
+            VERSION=${GITHUB_REF#refs/tags/v}
+            # 使用 jq 更新 package.json 中的版本號
+            jq ".version = \"$VERSION\"" package.json > temp.json && mv temp.json package.json
+            echo "Publishing version: $VERSION"
+
+      - name: Publish to NPM 📦
+        run: pnpm publish --no-git-checks --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
